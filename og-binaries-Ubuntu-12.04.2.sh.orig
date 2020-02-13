@@ -1,0 +1,29 @@
+#!/bin/sh
+##################### RUN AS ROOT ####################
+echo "--- System Binaries ---" > binaryVerifyOG.txt
+echo "" >> binaryVerifyOG.txt
+for i in /bin/*
+do
+	binary=$(echo "$i" | cut -d "/" -f3)
+	md5sum=$(md5sum $i | cut -d " " -f1)
+	echo "$i $md5sum" >> binaryVerifyOG.txt 
+done
+echo "" >> binaryVerifyOG.txt
+echo "--- Admin Binaries ---" >> binaryVerifyOG.txt
+echo "" >> binaryVerifyOG.txt
+for i in /sbin/*
+do
+	binary=$(echo "$i" | cut -d "/" -f3)
+	md5sum=$(md5sum $i | cut -d " " -f1)
+	echo "$i $md5sum" >> binaryVerifyOG.txt 
+done
+echo "" >> binaryVerifyOG.txt
+echo "--- User Binaries ---" >> binaryVerifyOG.txt
+echo "" >> binaryVerifyOG.txt
+for i in /usr/bin/*
+do
+	binary=$(echo "$i" | cut -d "/" -f4)
+	md5sum=$(md5sum $i | cut -d " " -f1)
+	echo "$i $md5sum" >> binaryVerifyOG.txt 
+done
+
